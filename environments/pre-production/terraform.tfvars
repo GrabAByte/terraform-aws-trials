@@ -3,5 +3,5 @@ instance_size = "t1.micro"
 
 tags = {
   name        = "Grababyte"
-  environment = "development"
+  environment = "pre-production"
 }
