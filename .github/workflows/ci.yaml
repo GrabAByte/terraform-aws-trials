@@ -1,0 +1,24 @@
+---
+name: CI
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    strategy:
+      matrix:
+        environment: [development,staging,pre-production]
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformLint.yml@0.8.0
+    with:
+      terraformPath: ${{ matrix.environment }}
+  plan:
+    strategy:
+      matrix:
+        environment: [development,staging,pre-production]
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformPlan.yml@0.8.0
+    with:
+      terraformPath: ${{ matrix.environment }}
+    needs: lint
