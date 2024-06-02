@@ -11,14 +11,22 @@ jobs:
     strategy:
       matrix:
         environment: [development,staging,pre-production]
-    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformLint.yml@0.8.0
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformLint.yml@feat/terraformValidate
     with:
-      terraformPath: ${{ matrix.environment }}
+      terraformPath: environments/${{ matrix.environment }}
+  validate:
+    strategy:
+      matrix:
+        environment: [development,staging,pre-production]
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformValidate.yml@feat/terraformValidate
+    with:
+      terraformPath: environments/${{ matrix.environment }}
+    needs: Lint
   plan:
     strategy:
       matrix:
         environment: [development,staging,pre-production]
-    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformPlan.yml@0.8.0
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformPlan.yml@feat/terraformValidate
     with:
-      terraformPath: ${{ matrix.environment }}
-    needs: lint
+      terraformPath: environments/${{ matrix.environment }}
+    needs: [lint,validate]
