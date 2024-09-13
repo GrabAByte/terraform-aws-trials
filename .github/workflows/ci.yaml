@@ -19,8 +19,10 @@ jobs:
   plan:
     strategy:
       matrix:
-        environment: [development,pre-production,production]
+        environments: [development,pre-production,production]
+        whitepapers: [basic-ec2]
     uses: GrabAByte/github-devops-workflows/.github/workflows/terraformPlan.yml@fix/workflows
     with:
-      workspace: ${{ matrix.environment }}
+      workspace: ${{ matrix.environments }}
+      whitepaper: ${{ matrix.whitepapers }}
     needs: [lint,validate]
