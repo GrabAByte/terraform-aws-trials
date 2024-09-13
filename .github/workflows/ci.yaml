@@ -8,11 +8,11 @@ name: CI
 
 jobs:
   lint:
-    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformLint.yml@fix/workflows
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformLint.yml@0.9.4
     with:
       terraformPath: .
   validate:
-    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformValidate.yml@fix/workflows
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformValidate.yml@0.9.4
     with:
       terraformPath: .
     needs: Lint
@@ -21,7 +21,7 @@ jobs:
       matrix:
         environments: [development,pre-production,production]
         whitepapers: [basic-ec2]
-    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformPlan.yml@fix/workflows
+    uses: GrabAByte/github-devops-workflows/.github/workflows/terraformPlan.yml@0.9.4
     with:
       workspace: ${{ matrix.environments }}
       whitepaper: ${{ matrix.whitepapers }}
