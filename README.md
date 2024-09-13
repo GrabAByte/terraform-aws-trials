@@ -1,2 +1,2 @@
-# terraform-aws-trial
+# terraform-aws-whitepapers
 
