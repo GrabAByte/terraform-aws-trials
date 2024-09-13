@@ -1,1 +1,2 @@
 environments/*/.terraform*
+terraform.tfstate.d
